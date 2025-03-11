@@ -1,7 +1,7 @@
 # Import python packages
 import streamlit as st
 import pandas as pd
-from snowflake.snowpark.context import get_active_session
+#from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
 # Write directly to the app
@@ -24,7 +24,11 @@ st.write('You selected:', option)
 
 test_dataframe = 'test'
 
-session = get_active_session()
+# comment the followint line and add cnx and session
+#session = get_active_session()
+cnx = st.connection("snowflake")
+session = cnx.session()
+
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'))
 #st.dataframe(data=my_dataframe, use_container_width=True)
 
